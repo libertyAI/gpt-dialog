@@ -1,0 +1,43 @@
+.App {
+  height: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.App .dialog {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  /* define your gradient colors */
+  border-image: linear-gradient(to right, red, orange, yellow) 1;
+  flex: 1;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.App .dialog .content {
+  font-size: 20px;
+  border: 1px solid green;
+  margin-bottom: 20px;
+  margin-right: 50px;
+  padding: 10px 20px;
+  max-width: 50%;
+}
+
+.App .input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.App .input-container textarea {
+  flex: auto;
+  font-size: 18px;
+}
+
+.App .input-container button {
+  margin-left: 20px;
+}
