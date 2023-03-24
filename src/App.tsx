@@ -1,5 +1,6 @@
 import './App.css';
 import {useState} from 'react';
+import axios from 'axios';
 
 type Dialog = {
   type: 'user' | 'server'
@@ -10,19 +11,30 @@ function App() {
   const [inputVal, setInputVal] = useState('');
   const [dialogList, setDialogList] = useState<Array<Dialog>>([]);
   const handleClick = () => {
-    console.info('🚀🚀', 'inputVal -->', inputVal, `<-- App.tsx/handleClick`);
     setDialogList((prevState) => {
-      console.info('🚀🚀', 'prevState -->', prevState, `<-- App.tsx/`);
       return [...prevState, {type: 'user', content: inputVal}];
     });
-    setInputVal('')
+    axios({
+      url: '/api/query',
+      method: 'post',
+      data: {
+        content: inputVal
+      }
+    }).then(res => {
+      console.info('🚀🚀', 'res -->', res, `<-- App.tsx/`);
+      setDialogList((prevState) => {
+        return [...prevState, {type: 'server', content: res.data}];
+      });
+    });
+    setInputVal('');
   };
   return (
     <div className="App">
       <div className="dialog">
         {dialogList.map(({type, content}) => {
           return (
-            <div key={type+Math.random().toString()} style={{display: 'flex', flexDirection: type === 'user' ? 'row-reverse' : 'row'}}>
+            <div key={type + Math.random().toString()}
+                 style={{display: 'flex', flexDirection: type === 'user' ? 'row-reverse' : 'row'}}>
               <div className={'content'}>{content}</div>
             </div>
           );
