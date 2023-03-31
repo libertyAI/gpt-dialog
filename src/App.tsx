@@ -9,6 +9,7 @@ type Dialog = {
 
 function App() {
   const [inputVal, setInputVal] = useState('');
+	const [x, ssetX] = useState(null)
   const [dialogList, setDialogList] = useState<Array<Dialog>>([]);
   const handleClick = () => {
     setDialogList((prevState) => {
